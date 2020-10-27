@@ -31,4 +31,4 @@ jobs:
         uses: eskatos/gradle-command-action@v1
         with:
           build-root-directory: integration-tests
-          arguments: clean test -PtargetUrl=http://cony-person-lab1.herokuapp.com --info
+          arguments: clean test -PtargetUrl=https://cony-person-lab1.herokuapp.com --info
