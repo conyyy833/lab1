@@ -36,7 +36,7 @@ public class PersonController {
      * 查询Person的对象集合
      * @return
      */
-    @GetMapping("/person")
+    @GetMapping("/persons")
     public List<Person> personList()
     {
         List<Person> people = personService.personList();
