@@ -48,7 +48,7 @@ public class PersonController {
     /**
      * 新增加一个人
      */
-    @PostMapping(value = "/personAdd")
+    @PostMapping(value = "/person")
     /**
      *public Person personAdd(@RequestBody Person person) {
      */
