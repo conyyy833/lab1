@@ -114,7 +114,10 @@ public class PersonService {
     /**
      * 新增加一个人
      */
-    public Person save(Person person) {
+    public Person save(String name,Integer age) {
+        Person person = new Person();
+        person.setName(name);
+        person.setAge(age);
         return personRepository.save(person);
     }
     /**

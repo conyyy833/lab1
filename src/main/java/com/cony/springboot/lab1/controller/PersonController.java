@@ -54,10 +54,7 @@ public class PersonController {
      */
 
     public CommonResult personAdd(@RequestParam("name") String name, @RequestParam("age") Integer age) {
-        Person person = new Person();
-        person.setName(name);
-        person.setAge(age);
-        Person person1 = personService.save(person);
+        Person person1 = personService.save(name,age);
         if(person1!=null)
         {
             return new CommonResult(HttpStatus.CREATED,person1);

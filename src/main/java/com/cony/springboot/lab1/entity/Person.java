@@ -24,6 +24,12 @@ public class Person{
     public Person() {
     }
 
+    public Person(Integer id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
     public Integer getId() {
         return id;
     }
