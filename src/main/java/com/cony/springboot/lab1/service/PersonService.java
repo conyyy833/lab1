@@ -27,11 +27,15 @@ public class PersonService {
 
     public List<Person> insertTwo(){
         Person person1 = new Person();
-        person1.setName("Amy");
-        person1.setAge(20);
+        person1.setName("Max");
+        person1.setAge(30);
+        person1.setAddress("Moscow");
+        person1.setWork("VRB");
         Person person2 = new Person();
         person2.setName("Lucy");
         person2.setAge(26);
+        person1.setAddress("China");
+        person1.setWork("ABC");
 
 
 
@@ -66,7 +70,9 @@ public class PersonService {
      * @return
      */
     public Person personAdd(@RequestParam("name") String name,
-                            @RequestParam("age") Integer age)
+                            @RequestParam("age") Integer age,
+                            @RequestParam("address") String address,
+                            @RequestParam("work") String work)
     {
         Person person = new Person();
         return personRepository.save(person);
@@ -88,8 +94,8 @@ public class PersonService {
      * @param name
      * @param age
      */
-    public Person personUpdate(Integer id, String name, Integer age) {
-        Integer flag = personRepository.personUpdate(id, name, age);
+    public Person personUpdate(Integer id, String name, Integer age,String address,String work) {
+        Integer flag = personRepository.personUpdate(id, name, age, address, work);
 
         if(flag==1)
         {//更新成功
@@ -114,10 +120,12 @@ public class PersonService {
     /**
      * 新增加一个人
      */
-    public Person save(String name,Integer age) {
+    public Person save(String name,Integer age,String address,String work) {
         Person person = new Person();
         person.setName(name);
         person.setAge(age);
+        person.setAddress(address);
+        person.setWork(work);
         return personRepository.save(person);
     }
     /**

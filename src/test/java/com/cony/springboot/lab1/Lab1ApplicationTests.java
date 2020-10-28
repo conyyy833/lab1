@@ -32,10 +32,10 @@ class Lab1ApplicationTests {
         MockMvc mockMvc;
         @Test
         public void personFindOne() throws Exception {
-            Person person=new Person(1,"cony",12);
+            Person person=new Person(1,"cony",12,"Moscow","VRB");
 
             when(personService.findById(1)).thenReturn(person);
-            mockMvc.perform(get("/person/{id}",1))
+            mockMvc.perform(get("/persons/{id}",1))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
@@ -44,7 +44,7 @@ class Lab1ApplicationTests {
         @Test
         public void personList() throws Exception {
             List<Person> list=new ArrayList<>();
-            Person person=new Person(1,"cony",12);
+            Person person=new Person(1,"cony",12,"Moscow","VRB");
             list.add(person);
 
             when(personService.personList()).thenReturn(list);
@@ -56,12 +56,14 @@ class Lab1ApplicationTests {
         }
         @Test
         public void personAdd() throws Exception {
-            Person person=new Person(1,"cony",12);
+            Person person=new Person(1,"cony",12,"Moscow","VRB");
 
-            when(personService.save("cony",12)).thenReturn(person);
+            when(personService.save("cony",12,"Moscow","VRB")).thenReturn(person);
             mockMvc.perform(post("/person")
                     .param("name","cony")
-                    .param("age","12"))
+                    .param("age","12")
+                    .param("address","Moscow")
+                    .param("work","VRB"))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
@@ -69,19 +71,21 @@ class Lab1ApplicationTests {
 
         @Test
         public void personUpdate() throws Exception {
-            Person person=new Person(1,"cony",12);
+            Person person=new Person(1,"cony",12,"Moscow","VRB");
 
-            when(personService.personUpdate(1,"cony",12)).thenReturn(person);
+            when(personService.personUpdate(1,"cony",12,"Moscow","VRB")).thenReturn(person);
             mockMvc.perform(patch("/person/{id}",1)
                     .param("name","cony")
-                    .param("age","12"))
+                    .param("age","12")
+                    .param("address","Moscow")
+                    .param("work","VRB"))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
         }
         @Test
         public void personDelete() throws Exception {
-            Person person=new Person(1,"cony",12);
+            Person person=new Person(1,"cony",12,"Moscow","VRB");
 
             when(personService.myDeleteById(1)).thenReturn(1);
             mockMvc.perform(delete("/person/{id}",1))

@@ -53,8 +53,11 @@ public class PersonController {
      *public Person personAdd(@RequestBody Person person) {
      */
 
-    public CommonResult personAdd(@RequestParam("name") String name, @RequestParam("age") Integer age) {
-        Person person1 = personService.save(name,age);
+    public CommonResult personAdd(@RequestParam("name") String name,
+                                  @RequestParam("age") Integer age,
+                                  @RequestParam("address") String address,
+                                  @RequestParam("work") String work) {
+        Person person1 = personService.save(name,age,address,work);
         if(person1!=null)
         {
             return new CommonResult(HttpStatus.CREATED,person1);
@@ -68,7 +71,7 @@ public class PersonController {
     /**
      * 查询人
      */
-    @GetMapping(value = "/person/{id}")
+    @GetMapping(value = "/persons/{id}")
     public CommonResult personFindOne(@PathVariable("id") Integer id) {
         Person person = personService.findById(id);
         if(person!=null)
@@ -85,9 +88,11 @@ public class PersonController {
     @PatchMapping (value = "/person/{id}")
     public Person personUpdate(@PathVariable("id") Integer id,
                                @RequestParam("name") String name,
-                               @RequestParam("age") Integer age) {
+                               @RequestParam("age") Integer age,
+                               @RequestParam("address") String address,
+                               @RequestParam("work") String work) {
 
-        return personService.personUpdate(id, name, age);
+        return personService.personUpdate(id, name, age,address,work);
     }
 
 

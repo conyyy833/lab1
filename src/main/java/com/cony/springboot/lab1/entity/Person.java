@@ -21,13 +21,19 @@ public class Person{
 
     private Integer age;
 
+    private String address;
+
+    private String work;
+
     public Person() {
     }
 
-    public Person(Integer id, String name, Integer age) {
+    public Person(Integer id, String name, Integer age, String address, String work) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.address = address;
+        this.work = work;
     }
 
     public Integer getId() {
@@ -54,12 +60,30 @@ public class Person{
         this.age = age;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", address='" + address + '\'' +
+                ", work='" + work + '\'' +
                 '}';
     }
 }
