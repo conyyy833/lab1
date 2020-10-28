@@ -37,11 +37,15 @@ public class PersonController {
      * @return
      */
     @GetMapping("/persons")
-    public List<Person> personList()
+    public CommonResult personList()
     {
-        List<Person> people = personService.personList();
-
-        return people;
+        List<Person> personList = personService.personList();
+        if(personList!=null)
+        {
+            return new CommonResult(HttpStatus.CREATED,personList);
+        }
+        else
+            return new CommonResult(HttpStatus.NOT_FOUND,null);
 
     }
 
@@ -84,9 +88,16 @@ public class PersonController {
      *                                @RequestParam("work") String work
      */
     @PatchMapping (value = "/person/{id}")
-    public Person personUpdate(@PathVariable("id") Integer id,@RequestBody Person person) {
+    public CommonResult personUpdate(@PathVariable("id") Integer id,@RequestBody Person person) {
 
-        return personService.personUpdate(id,person);
+        Person person1 = personService.personUpdate(id, person);
+
+        if(person1!=null)
+        {
+            return new CommonResult(HttpStatus.CREATED,person1);
+        }
+        else
+            return new CommonResult(HttpStatus.NOT_FOUND,null);
     }
 
 
@@ -95,9 +106,17 @@ public class PersonController {
      */
 
     @DeleteMapping(value = "/person/{id}")
-    public Integer personDelete(@PathVariable("id") Integer id) {
+    public CommonResult personDelete(@PathVariable("id") Integer id) {
 
-        return personService.myDeleteById(id);
+        Integer integer = personService.myDeleteById(id);
+
+        if(integer!=0)
+        {
+            return new CommonResult(HttpStatus.CREATED,integer);
+        }
+        else
+            return new CommonResult(HttpStatus.NOT_FOUND,null);
+
     }
 
 
