@@ -35,6 +35,12 @@ public class Person{
         this.address = address;
         this.work = work;
     }
+    public Person(String name, Integer age, String address, String work) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.work = work;
+    }
 
     public Integer getId() {
         return id;

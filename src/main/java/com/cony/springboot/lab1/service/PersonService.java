@@ -91,16 +91,15 @@ public class PersonService {
     /**
      * 更新
      * @param id
-     * @param name
-     * @param age
+
      */
-    public Person personUpdate(Integer id, String name, Integer age,String address,String work) {
-        Integer flag = personRepository.personUpdate(id, name, age, address, work);
+    public Person personUpdate(Integer id,Person person) {
+        Integer flag = personRepository.personUpdate(id,person);
 
         if(flag==1)
         {//更新成功
-            Person person = personRepository.findById(id).get();
-            return person;
+            Person person1 = personRepository.findById(id).get();
+            return person1;
         }
         else
             return null;
@@ -120,12 +119,7 @@ public class PersonService {
     /**
      * 新增加一个人
      */
-    public Person save(String name,Integer age,String address,String work) {
-        Person person = new Person();
-        person.setName(name);
-        person.setAge(age);
-        person.setAddress(address);
-        person.setWork(work);
+    public Person save(Person person) {
         return personRepository.save(person);
     }
     /**

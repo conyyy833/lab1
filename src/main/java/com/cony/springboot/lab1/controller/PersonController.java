@@ -48,16 +48,10 @@ public class PersonController {
     /**
      * 新增加一个人
      */
-    @PostMapping(value = "/person")
-    /**
-     *public Person personAdd(@RequestBody Person person) {
-     */
 
-    public CommonResult personAdd(@RequestParam("name") String name,
-                                  @RequestParam("age") Integer age,
-                                  @RequestParam("address") String address,
-                                  @RequestParam("work") String work) {
-        Person person1 = personService.save(name,age,address,work);
+    @PostMapping(value = "/person")
+    public CommonResult personAdd(@RequestBody Person person) {
+        Person person1 = personService.save(person);
         if(person1!=null)
         {
             return new CommonResult(HttpStatus.CREATED,person1);
@@ -84,15 +78,15 @@ public class PersonController {
 
     /**
      * 更新人的数据
+     *  @RequestParam("name") String name,
+     *                                @RequestParam("age") Integer age,
+     *                                @RequestParam("address") String address,
+     *                                @RequestParam("work") String work
      */
     @PatchMapping (value = "/person/{id}")
-    public Person personUpdate(@PathVariable("id") Integer id,
-                               @RequestParam("name") String name,
-                               @RequestParam("age") Integer age,
-                               @RequestParam("address") String address,
-                               @RequestParam("work") String work) {
+    public Person personUpdate(@PathVariable("id") Integer id,@RequestBody Person person) {
 
-        return personService.personUpdate(id, name, age,address,work);
+        return personService.personUpdate(id,person);
     }
 
 

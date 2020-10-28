@@ -1,6 +1,6 @@
 package com.cony.springboot.lab1;
 
-import com.cony.springboot.lab1.entity.CommonResult;
+import com.alibaba.fastjson.JSONObject;
 import com.cony.springboot.lab1.entity.Person;
 import com.cony.springboot.lab1.service.PersonService;
 import org.junit.jupiter.api.Test;
@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,10 +30,9 @@ class Lab1ApplicationTests {
         PersonService personService;
         @Autowired
         MockMvc mockMvc;
-        @Test
+        @Test//能找到
         public void personFindOne() throws Exception {
             Person person=new Person(1,"cony",12,"Moscow","VRB");
-
             when(personService.findById(1)).thenReturn(person);
             mockMvc.perform(get("/persons/{id}",1))
                     .andExpect(status().isOk())
@@ -41,6 +40,7 @@ class Lab1ApplicationTests {
                     .andReturn();
 
         }
+
         @Test
         public void personList() throws Exception {
             List<Person> list=new ArrayList<>();
@@ -57,13 +57,12 @@ class Lab1ApplicationTests {
         @Test
         public void personAdd() throws Exception {
             Person person=new Person(1,"cony",12,"Moscow","VRB");
+            Person person1=new Person("cony",12,"Moscow","VRB");
 
-            when(personService.save("cony",12,"Moscow","VRB")).thenReturn(person);
+            when(personService.save(person)).thenReturn(person);
             mockMvc.perform(post("/person")
-                    .param("name","cony")
-                    .param("age","12")
-                    .param("address","Moscow")
-                    .param("work","VRB"))
+                    .content(JSONObject.toJSONString(person1))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
@@ -72,13 +71,11 @@ class Lab1ApplicationTests {
         @Test
         public void personUpdate() throws Exception {
             Person person=new Person(1,"cony",12,"Moscow","VRB");
-
-            when(personService.personUpdate(1,"cony",12,"Moscow","VRB")).thenReturn(person);
+            Person person1=new Person("cony",12,"Moscow","VRB");
+            when(personService.personUpdate(1,person)).thenReturn(person);
             mockMvc.perform(patch("/person/{id}",1)
-                    .param("name","cony")
-                    .param("age","12")
-                    .param("address","Moscow")
-                    .param("work","VRB"))
+                    .content(JSONObject.toJSONString(person1))
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
