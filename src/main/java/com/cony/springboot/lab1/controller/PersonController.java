@@ -78,7 +78,7 @@ public class PersonController {
         Person person = personService.findById(id);
         if(person!=null)
         {
-            return new ResponseEntity(person,HttpStatus.FOUND);
+            return new ResponseEntity(person,HttpStatus.OK);
         }
         else
             return new ResponseEntity("error",HttpStatus.NOT_FOUND);
