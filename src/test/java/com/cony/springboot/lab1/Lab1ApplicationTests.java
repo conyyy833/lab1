@@ -55,7 +55,7 @@ class Lab1ApplicationTests {
 
             when(personService.personList()).thenReturn(list);
             mockMvc.perform(get("/persons"))
-                    .andExpect(status().isCreated())
+                    .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
 

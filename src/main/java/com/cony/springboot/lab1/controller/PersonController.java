@@ -38,7 +38,7 @@ public class PersonController {
         List<Person> personList = personService.personList();
         if(personList!=null)
         {
-            return new ResponseEntity(personList,HttpStatus.CREATED);
+            return new ResponseEntity(personList,HttpStatus.OK);
         }
         else
             return new ResponseEntity(HttpStatus.NOT_FOUND);
