@@ -28,7 +28,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update person set name=:person.name,age=:person.age,address=:person.address,work=:person.work where id=:id",nativeQuery = true)
+    @Query(value = "update person set name=:#{#person.name},age=:#{#person.age},address=:#{#person.address},work=:#{#person.work} where id=:id",nativeQuery = true)
     Integer personUpdate(@Param("id") Integer id,
                          @Param("person") Person person);
 

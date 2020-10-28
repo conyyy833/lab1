@@ -25,26 +25,6 @@ public class PersonService {
     @Autowired
     PersonRepository personRepository;
 
-    public List<Person> insertTwo(){
-        Person person1 = new Person();
-        person1.setName("Max");
-        person1.setAge(30);
-        person1.setAddress("Moscow");
-        person1.setWork("VRB");
-        Person person2 = new Person();
-        person2.setName("Lucy");
-        person2.setAge(26);
-        person1.setAddress("China");
-        person1.setWork("ABC");
-
-
-
-        List<Person> list=new ArrayList<>();
-        list.add(person1);
-        list.add(person2);
-        List<Person> people = personRepository.saveAll(list);
-        return people;
-    }
 
     /**
      * 什么是事务？

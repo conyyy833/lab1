@@ -1,15 +1,15 @@
 package com.cony.springboot.lab1.controller;
 
 import com.cony.springboot.lab1.dao.PersonRepository;
-import com.cony.springboot.lab1.entity.CommonResult;
 import com.cony.springboot.lab1.entity.Person;
 import com.cony.springboot.lab1.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 控制层 控制业务逻辑
@@ -26,26 +26,22 @@ public class PersonController {
     @Autowired
     public PersonService personService;
 
-    @GetMapping("/")
-    public List<Person> init()
-    {
-       return personService.insertTwo();
-    }
+
 
     /**
      * 查询Person的对象集合
      * @return
      */
     @GetMapping("/persons")
-    public CommonResult personList()
+    public ResponseEntity personList()
     {
         List<Person> personList = personService.personList();
         if(personList!=null)
         {
-            return new CommonResult(HttpStatus.CREATED,personList);
+            return new ResponseEntity(personList,HttpStatus.CREATED);
         }
         else
-            return new CommonResult(HttpStatus.NOT_FOUND,null);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
 
     }
 
@@ -54,14 +50,14 @@ public class PersonController {
      */
 
     @PostMapping(value = "/persons")
-    public CommonResult personAdd(@RequestBody Person person) {
+    public ResponseEntity personAdd(@RequestBody Person person) {
         Person person1 = personService.save(person);
         if(person1!=null)
         {
-            return new CommonResult(HttpStatus.CREATED,person1);
+            return new ResponseEntity(person1,HttpStatus.CREATED);
         }
         else
-            return new CommonResult(HttpStatus.NOT_FOUND,null);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
 
 
     }
@@ -70,14 +66,14 @@ public class PersonController {
      * 查询人
      */
     @GetMapping(value = "/persons/{id}")
-    public CommonResult personFindOne(@PathVariable("id") Integer id) {
+    public ResponseEntity personFindOne(@PathVariable("id") Integer id) {
         Person person = personService.findById(id);
         if(person!=null)
         {
-            return new CommonResult(HttpStatus.FOUND,person);
+            return new ResponseEntity(person,HttpStatus.FOUND);
         }
         else
-            return new CommonResult(HttpStatus.NOT_FOUND,null);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -88,16 +84,16 @@ public class PersonController {
      *                                @RequestParam("work") String work
      */
     @PatchMapping (value = "/person/{id}")
-    public CommonResult personUpdate(@PathVariable("id") Integer id,@RequestBody Person person) {
+    public ResponseEntity personUpdate(@PathVariable("id") Integer id,@RequestBody Person person) {
 
         Person person1 = personService.personUpdate(id, person);
 
         if(person1!=null)
         {
-            return new CommonResult(HttpStatus.CREATED,person1);
+            return new ResponseEntity(person1,HttpStatus.CREATED);
         }
         else
-            return new CommonResult(HttpStatus.NOT_FOUND,null);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
 
@@ -106,29 +102,18 @@ public class PersonController {
      */
 
     @DeleteMapping(value = "/person/{id}")
-    public CommonResult personDelete(@PathVariable("id") Integer id) {
+    public ResponseEntity personDelete(@PathVariable("id") Integer id) {
 
         Integer integer = personService.myDeleteById(id);
 
         if(integer!=0)
         {
-            return new CommonResult(HttpStatus.CREATED,integer);
+            return new ResponseEntity(integer,HttpStatus.CREATED);
         }
         else
-            return new CommonResult(HttpStatus.NOT_FOUND,null);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
 
     }
-
-
-//    /**
-//     * 通过id查询人的信息列表
-//     */
-//    @GetMapping(value = "/person/{id}")
-//    public Person findById(@PathVariable("id") Integer id) {
-//
-//        return personService.findById(id);
-//    }
-
 
 
 }
