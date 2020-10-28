@@ -41,7 +41,7 @@ public class PersonController {
             return new ResponseEntity(personList,HttpStatus.OK);
         }
         else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity("error",HttpStatus.NOT_FOUND);
 
     }
 
@@ -57,7 +57,7 @@ public class PersonController {
             return new ResponseEntity(person1,HttpStatus.CREATED);
         }
         else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity("error",HttpStatus.NOT_FOUND);
 
 
     }
@@ -73,7 +73,7 @@ public class PersonController {
             return new ResponseEntity(person,HttpStatus.FOUND);
         }
         else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity("error",HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -93,7 +93,7 @@ public class PersonController {
             return new ResponseEntity(person1,HttpStatus.CREATED);
         }
         else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity("error",HttpStatus.NOT_FOUND);
     }
 
 
@@ -111,7 +111,7 @@ public class PersonController {
             return new ResponseEntity(integer,HttpStatus.CREATED);
         }
         else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity("error",HttpStatus.NOT_FOUND);
 
     }
 
