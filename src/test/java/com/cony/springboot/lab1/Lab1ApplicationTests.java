@@ -60,7 +60,7 @@ class Lab1ApplicationTests {
             Person person1=new Person("cony",12,"Moscow","VRB");
 
             when(personService.save(person)).thenReturn(person);
-            mockMvc.perform(post("/person")
+            mockMvc.perform(post("/persons")
                     .content(JSONObject.toJSONString(person1))
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())

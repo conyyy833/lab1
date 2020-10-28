@@ -49,7 +49,7 @@ public class PersonController {
      * 新增加一个人
      */
 
-    @PostMapping(value = "/person")
+    @PostMapping(value = "/persons")
     public CommonResult personAdd(@RequestBody Person person) {
         Person person1 = personService.save(person);
         if(person1!=null)
